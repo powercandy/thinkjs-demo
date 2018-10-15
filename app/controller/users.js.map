@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/users.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "userList",
+        "model",
+        "select",
+        "success",
+        "info",
+        "code"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,WAAW,MAAM,MAAKC,KAAL,CAAW,OAAX,EAAoBC,MAApB,EAAvB;AACA,aAAO,MAAKC,OAAL,CAAa;AAClBC,cAAMJ,QADY;AAElBK,cAAM;AAFY,OAAb,CAAP;AAFkB;AAMnB;AAPiC,CAApC",
+    "file": "../../src/controller/users.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n    const userList = await this.model('users').select()\n    return this.success({\n      info: userList,\n      code: '0000'\n    })\n  }\n};\n"
+    ]
+}

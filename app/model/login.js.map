@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/model/login.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Model",
+        "verifyPassword",
+        "userInfo",
+        "password",
+        "md5",
+        "encrypt"
+    ],
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzC;AACAC,iBAAeC,WAAS,EAAxB,EAA4BC,WAAS,EAArC,EAAyC;AACvC,WAAOJ,MAAMK,GAAN,CAAUL,MAAMK,GAAN,CAAUD,QAAV,IAAsBD,SAASG,OAAzC,MAAsDH,SAASG,OAAtE;AACD;AAJwC,CAA3C",
+    "file": "../../src/model/login.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Model {\n  // 密码校验\n  verifyPassword(userInfo={}, password='') {\n    return think.md5(think.md5(password) + userInfo.encrypt) === userInfo.encrypt\n  }\n};\n"
+    ]
+}

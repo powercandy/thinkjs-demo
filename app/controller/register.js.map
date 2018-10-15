@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/register.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "account",
+        "post",
+        "password",
+        "userList",
+        "model",
+        "where",
+        "find",
+        "think",
+        "isEmpty",
+        "fail",
+        "insertId",
+        "add",
+        "name",
+        "success",
+        "msg"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,aAAN,GAAoB;AAAA;;AAAA;AAClB;AACA,YAAMC,UAAU,MAAKC,IAAL,CAAU,SAAV,CAAhB;AACA;AACA,YAAMC,WAAW,MAAKD,IAAL,CAAU,UAAV,CAAjB;AACA;AACA,YAAME,WAAW,MAAM,MAAKC,KAAL,CAAW,OAAX,EAAoBC,KAApB,CAA0B,EAACL,SAASA,OAAV,EAA1B,EAA8CM,IAA9C,EAAvB;AACA;AACA,UAAI,CAACC,MAAMC,OAAN,CAAcL,QAAd,CAAL,EAA8B;AAC5B,eAAO,MAAKM,IAAL,CAAU,OAAV,CAAP;AACD;AACD;AACA,YAAMC,WAAW,MAAM,MAAKN,KAAL,CAAW,OAAX,EAAoBO,GAApB,CAAwB;AAC7CX,iBAASA,OADoC;AAE7CE,kBAAUA,QAFmC;AAG7CU,cAAM;AAHuC,OAAxB,CAAvB;AAKA,UAAI,CAACF,QAAL,EAAe;AACb,eAAO,MAAKD,IAAL,CAAU,MAAV,CAAP;AACD;AACD;AACA,aAAO,MAAKI,OAAL,CAAa;AAClBC,aAAK;AADa,OAAb,CAAP;AArBkB;AAwBnB;AAzBiC,CAApC",
+    "file": "../../src/controller/register.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n    // 获取请求参数 - 用户名\n    const account = this.post('account')\n    // 获取请求参数 - 密码\n    const password = this.post('password')\n    // 查询用户数据\n    const userList = await this.model('users').where({account: account}).find()\n    // 用户已存在 - 返回\n    if (!think.isEmpty(userList)) {\n      return this.fail('用户已存在')\n    }\n    // 用户不存在 - 新建用户\n    const insertId = await this.model('users').add({\n      account: account,\n      password: password,\n      name: ''\n    })\n    if (!insertId) {\n      return this.fail('注册失败')\n    }\n    // 用户存在 - 比对密码 - 密码正确 - 登录成功\n    return this.success({\n      msg: '注册成功'\n    })\n  }\n};\n"
+    ]
+}

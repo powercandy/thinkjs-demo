@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/config/middleware.js"
+    ],
+    "names": [
+        "path",
+        "require",
+        "isDev",
+        "think",
+        "env",
+        "module",
+        "exports",
+        "handle",
+        "options",
+        "logRequest",
+        "sendResponseTime",
+        "enable",
+        "root",
+        "join",
+        "ROOT_PATH",
+        "publicPath",
+        "isCli",
+        "debug",
+        "keepExtensions",
+        "limit"
+    ],
+    "mappings": "AAAA,MAAMA,OAAOC,QAAQ,MAAR,CAAb;AACA,MAAMC,QAAQC,MAAMC,GAAN,KAAc,aAA5B;;AAEAC,OAAOC,OAAP,GAAiB,CACf;AACEC,UAAQ,MADV,EACkB;AAChBC,WAAS;AACPC,gBAAYP,KADL,EACY;AACnBQ,sBAAkBR,KAFX,CAEiB;AAFjB;AAFX,CADe,EAQf;AACEK,UAAQ,UADV,EACsB;AACpBI,UAAQT,KAFV,EAEiB;AACfM,WAAS;AACPI,UAAMZ,KAAKa,IAAL,CAAUV,MAAMW,SAAhB,EAA2B,KAA3B,CADC;AAEPC,gBAAY;AAFL;AAHX,CARe,EAgBf;AACER,UAAQ,OADV,EACmB;AACjBI,UAAQ,CAACR,MAAMa,KAFjB,EAEwB;AACtBR,WAAS;AACPS,WAAOf;AADA;AAHX,CAhBe,EAuBf;AACEK,UAAQ,SADV,EACqB;AACnBC,WAAS;AACPU,oBAAgB,IADT;AAEPC,WAAO;AAFA;AAFX,CAvBe,EA8Bf;AACEZ,UAAQ,QADV,EACoB;AAClBC,WAAS;AAFX,CA9Be,EAkCf,OAlCe,EAkCN;AACT,YAnCe,CAmCF;AAnCE,CAAjB",
+    "file": "../../src/config/middleware.js",
+    "sourcesContent": [
+        "const path = require('path');\nconst isDev = think.env === 'development';\n\nmodule.exports = [\n  {\n    handle: 'meta', // 显示一些meta信息，如thinkjs版本号，接口的处理时间等\n    options: {\n      logRequest: isDev, // 是否打印请求\n      sendResponseTime: isDev // 是否发送响应时间\n    }\n  },\n  {\n    handle: 'resource', //  处理静态资源\n    enable: isDev, // 是否开启\n    options: {\n      root: path.join(think.ROOT_PATH, 'www'),\n      publicPath: /^\\/(static|favicon\\.ico)/\n    }\n  },\n  {\n    handle: 'trace', // 处理错误信息\n    enable: !think.isCli, // 是否开启\n    options: {\n      debug: isDev\n    }\n  },\n  {\n    handle: 'payload', // 处理表单提交和文件上传\n    options: {\n      keepExtensions: true,\n      limit: '5mb'\n    }\n  },\n  {\n    handle: 'router', // 路由解析\n    options: {}\n  },\n  'logic', // logic调用，数据校验\n  'controller' // controller 和 action 调用\n];\n"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/base.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "__before"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACxCC,UAAN,GAAiB;AACf;AACA;AACA;AACA;;AAJe;AAKhB;AAN6C,CAAhD",
+    "file": "../../src/controller/base.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\n  async __before() {\n    // const isLogin = await this.session('token').catch(_ => ({}))\n    // if (!isLogin) {\n    //   return this.ctx.throw(401, '请先登录后再操作')\n    // }\n  }\n};\n"
+    ]
+}

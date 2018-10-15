@@ -1,0 +1,44 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/meta.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "listAction",
+        "meta",
+        "model",
+        "metaInfo",
+        "select",
+        "success",
+        "msg",
+        "contentAction",
+        "id",
+        "post",
+        "think",
+        "isEmpty",
+        "fail",
+        "where",
+        "find",
+        "addAction",
+        "Object",
+        "assign",
+        "user_id",
+        "result",
+        "add",
+        "updateAction",
+        "update",
+        "deleteAction",
+        "findResult",
+        "delete"
+    ],
+    "mappings": "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",
+    "file": "../../src/controller/meta.js",
+    "sourcesContent": [
+        "/**\n * 获取分类列表，获取分类信息，添加分类信息，更新分类信息\n */\n\nconst Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n  }\n  async listAction() {\n    const meta = this.model('meta')\n    // 获取meta表中所有的数据\n    const metaInfo = await meta.select()\n    return this.success({\n      msg: '获取标签列表成功',\n      metaInfo: metaInfo\n    })\n  }\n  async contentAction() {\n    const meta = this.model('meta')\n    const id = this.post('id')\n    if (think.isEmpty(id) || !id) {\n      return this.fail('请传入对应的参数id')\n    }\n    //获取meta表中对应id的数据\n    const metaInfo = await meta.where({id: id}).find()\n    if (think.isEmpty(metaInfo)) {\n      return this.fail('查询内容失败')\n    }\n    return this.success({\n      msg: '获取内容成功',\n      metaInfo: metaInfo\n    })\n  }\n  async addAction() {\n    const meta = this.model('meta')\n    let metaInfo = this.post()\n    if (think.isEmpty(metaInfo) || !metaInfo) {\n      return this.fail('请检查参数是否正确')\n    }\n    metaInfo = Object.assign(metaInfo, {user_id: 1})\n    const result = await meta.add(metaInfo)\n    if (think.isEmpty(result)) {\n      return this.fail('增加数据失败')\n    }\n    return this.success({\n      msg: '添加数据成功'\n    })\n\n  }\n  async updateAction() {\n    const meta = this.model('meta')\n    const metaInfo = this.post()\n    if (think.isEmpty(metaInfo) || !metaInfo) {\n      return this.fail('请检查参数是否正确')\n    }\n    const result = await meta.update(metaInfo)\n    if (think.isEmpty(result)) {\n      return this.fail('更新失败')\n    }\n    return this.success({msg: '更新成功'})\n  }\n  async deleteAction() {\n    const meta = this.model('meta')\n    const id = this.post('id')\n    if (think.isEmpty(id) || !id) {\n      return this.fail('请检查参数是否正确')\n    }\n    const findResult = await meta.where({id: id}).find()\n    if (think.isEmpty(findResult)) {\n      return this.fail('此数据已被删除，请刷新列表')\n    }\n    const result = await meta.where({id: id}).delete()\n    if (think.isEmpty(result)) {\n      return this.fail('删除失败')\n    }\n    return this.success({msg: '删除成功'})\n  }\n};\n"
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/content.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "listAction",
+        "content",
+        "model",
+        "contentInfo",
+        "select",
+        "success",
+        "msg",
+        "contentAction",
+        "id",
+        "post",
+        "think",
+        "isEmpty",
+        "fail",
+        "where",
+        "find",
+        "addAction",
+        "result",
+        "add",
+        "updateAction",
+        "update",
+        "deleteAction",
+        "findResult",
+        "delete"
+    ],
+    "mappings": "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",
+    "file": "../../src/controller/content.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n  }\n  async listAction() {\n    const content = this.model('content')\n    // 获取content表中所有的数据\n    const contentInfo = await content.select()\n    return this.success({\n      msg: '获取内容列表成功',\n      contentInfo: contentInfo\n    })\n  }\n  async contentAction() {\n    const content = this.model('content')\n    const id = this.post('id')\n    if (think.isEmpty(id) || !id) {\n      return this.fail('请传入对应的参数id')\n    }\n    //获取content表中对应id的数据\n    const contentInfo = await content.where({id: id}).find()\n    if (think.isEmpty(contentInfo)) {\n      return this.fail('查询内容失败')\n    }\n    return this.success({\n      msg: '获取内容成功',\n      contentInfo: contentInfo\n    })\n  }\n  async addAction() {\n    const content = this.model('content')\n    let contentInfo = this.post()\n    if (think.isEmpty(contentInfo) || !contentInfo) {\n      return this.fail('请检查参数是否正确')\n    }\n    const result = await content.add(contentInfo)\n    if (think.isEmpty(result)) {\n      return this.fail('增加数据失败')\n    }\n    return this.success({\n      msg: '添加数据成功'\n    })\n\n  }\n  async updateAction() {\n    const content = this.model('content')\n    const contentInfo = this.post()\n    if (think.isEmpty(contentInfo) || !contentInfo) {\n      return this.fail('请检查参数是否正确')\n    }\n    const result = await content.update(contentInfo)\n    if (think.isEmpty(result)) {\n      return this.fail('更新失败')\n    }\n    return this.success({msg: '更新成功'})\n  }\n  async deleteAction() {\n    const content = this.model('content')\n    const id = this.post('id')\n    if (think.isEmpty(id) || !id) {\n      return this.fail('请检查参数是否正确')\n    }\n    const findResult = await content.where({id: id}).find()\n    if (think.isEmpty(findResult)) {\n      return this.fail('此数据已被删除，请刷新列表')\n    }\n    const result = await content.where({id: id}).delete()\n    if (think.isEmpty(result)) {\n      return this.fail('删除失败')\n    }\n    return this.success({msg: '删除成功'})\n  }\n};\n"
+    ]
+}

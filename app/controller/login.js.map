@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/login.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "username",
+        "post",
+        "password",
+        "user",
+        "model",
+        "userInfo",
+        "where",
+        "find",
+        "think",
+        "isEmpty",
+        "fail",
+        "result",
+        "verifyPassword",
+        "encrypt",
+        "update",
+        "last_login_time",
+        "Date",
+        "getTime",
+        "token",
+        "session",
+        "success",
+        "msg"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,aAAN,GAAoB;AAAA;;AAAA;AAClB;AACA,YAAMC,WAAW,MAAKC,IAAL,CAAU,UAAV,CAAjB;AACA;AACA,YAAMC,WAAW,MAAKD,IAAL,CAAU,UAAV,CAAjB;AACA,YAAME,OAAO,MAAKC,KAAL,CAAW,MAAX,CAAb;AACA;AACA,YAAMC,WAAW,MAAMF,KAAKG,KAAL,CAAW,EAACN,UAAUA,QAAX,EAAX,EAAiCO,IAAjC,EAAvB;AACA;AACA,UAAIC,MAAMC,OAAN,CAAcJ,QAAd,CAAJ,EAA6B;AAC3B,eAAO,MAAKK,IAAL,CAAU,OAAV,CAAP;AACD;AACD;AACA,YAAMC,SAASR,KAAKS,cAAL,CAAoBP,QAApB,EAA8BH,QAA9B,CAAf;AACA,UAAIM,MAAMC,OAAN,CAAcE,MAAd,CAAJ,EAA2B;AACvB,eAAO,MAAKD,IAAL,CAAU,MAAV,CAAP;AACH;AACD;AACA,aAAOL,SAASH,QAAhB;AACA,aAAOG,SAASQ,OAAhB;AACA;AACAV,WAAKG,KAAL,CAAW,EAAEN,UAAUA,QAAZ,EAAX,EAAmCc,MAAnC,CAA0C,EAACC,iBAAkB,IAAIC,IAAJ,EAAD,CAAaC,OAAb,GAAuB,IAAzC,EAA1C;AACA;AACA,YAAMC,QAAQ,MAAM,MAAKC,OAAL,CAAa,UAAb,EAAyBd,QAAzB,CAApB;AACA;AACA,aAAO,MAAKe,OAAL,CAAa;AAClBC,aAAK,MADa;AAElBH,eAAOA;AAFW,OAAb,CAAP;AAzBkB;AA6BnB;AA9BiC,CAApC",
+    "file": "../../src/controller/login.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n    // 获取请求参数 - 用户名\n    const username = this.post('username')\n    // 获取请求参数 - 密码\n    const password = this.post('password')\n    const user = this.model('user')\n    // 查询用户数据\n    const userInfo = await user.where({username: username}).find()\n    // 用户不存在 - 返回\n    if (think.isEmpty(userInfo)) {\n      return this.fail('用户不存在')\n    }\n    // 用户存在 - 比对密码 - 密码错误\n    const result = user.verifyPassword(userInfo, password)\n    if (think.isEmpty(result)) {\n        return this.fail('密码错误')\n    }\n    // 删除密码和密码校验参数\n    delete userInfo.password\n    delete userInfo.encrypt\n    // 更新登录时间\n    user.where({ username: username }).update({last_login_time: (new Date()).getTime / 1000})\n    // 存储token\n    const token = await this.session('userInfo', userInfo)\n    // 返回成功数据\n    return this.success({\n      msg: '登录成功',\n      token: token\n    })\n  }\n};\n"
+    ]
+}
