@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "sources": [
+        "../../src/controller/view.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "content",
+        "model",
+        "id",
+        "post",
+        "think",
+        "isEmpty",
+        "fail",
+        "contentInfo",
+        "where",
+        "find",
+        "Number",
+        "status",
+        "view",
+        "update",
+        "success",
+        "msg"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,UAAU,MAAKC,KAAL,CAAW,SAAX,CAAhB;AACA,YAAMC,KAAK,MAAKC,IAAL,CAAU,IAAV,CAAX;AACA,UAAIC,MAAMC,OAAN,CAAcH,EAAd,KAAqB,CAACA,EAA1B,EAA8B;AAC5B,eAAO,MAAKI,IAAL,CAAU,YAAV,CAAP;AACD;AACD;AACA,UAAIC,cAAc,MAAMP,QAAQQ,KAAR,CAAc,EAACN,IAAIA,EAAL,EAAd,EAAwBO,IAAxB,EAAxB;AACA,UAAIL,MAAMC,OAAN,CAAcE,WAAd,CAAJ,EAAgC;AAC9B,eAAO,MAAKD,IAAL,CAAU,QAAV,CAAP;AACD;AACD,UAAI,CAACI,OAAOH,YAAYI,MAAnB,CAAL,EAAiC;AAC/B,eAAO,MAAKL,IAAL,CAAU,oBAAV,CAAP;AACD;AACDC,kBAAYK,IAAZ;AACAZ,cAAQa,MAAR,CAAeN,WAAf;AACA,aAAO,MAAKO,OAAL,CAAa;AAClBC,aAAK,QADa;AAElBR,qBAAaA;AAFK,OAAb,CAAP;AAhBkB;AAoBnB;AArBiC,CAApC",
+    "file": "../../src/controller/view.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n    const content = this.model('content')\n    const id = this.post('id')\n    if (think.isEmpty(id) || !id) {\n      return this.fail('请传入对应的参数id')\n    }\n    //获取content表中对应id的数据\n    let contentInfo = await content.where({id: id}).find()\n    if (think.isEmpty(contentInfo)) {\n      return this.fail('查询内容失败')\n    }\n    if (!Number(contentInfo.status)) {\n      return this.fail('该文章正在编辑，请耐心等候作者编辑！')\n    }\n    contentInfo.view ++\n    content.update(contentInfo)\n    return this.success({\n      msg: '获取内容成功',\n      contentInfo: contentInfo\n    })\n  }\n};\n"
+    ]
+}

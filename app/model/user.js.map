@@ -13,32 +13,11 @@
         "password",
         "md5",
         "encrypt",
-        "signPassword",
-        "formatDate",
-        "fmt",
-        "date",
-        "Date",
-        "o",
-        "getMonth",
-        "getDate",
-        "getHours",
-        "getMinutes",
-        "getSeconds",
-        "Math",
-        "floor",
-        "getMilliseconds",
-        "test",
-        "replace",
-        "RegExp",
-        "$1",
-        "getFullYear",
-        "substr",
-        "length",
-        "k"
+        "signPassword"
     ],
-    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzC;;;;;AAKAC,iBAAeC,WAAS,EAAxB,EAA4BC,WAAS,EAArC,EAAyC;AACvC;AACA,WAAOJ,MAAMK,GAAN,CAAUL,MAAMK,GAAN,CAAUD,QAAV,IAAsBD,SAASG,OAAzC,MAAsDH,SAASC,QAAtE;AACD;AACD;;;;;AAKAG,eAAaJ,WAAS,EAAtB,EAA0BC,WAAS,EAAnC,EAAuC;AACrC,WAAOJ,MAAMK,GAAN,CAAUL,MAAMK,GAAN,CAAUD,QAAV,IAAsBD,SAASG,OAAzC,CAAP;AACD;AACDE,aAAWC,MAAI,qBAAf,EAAsCC,OAAK,IAAIC,IAAJ,EAA3C,EAAuD;AACrD,QAAIC,IAAI;AACN,YAAOF,KAAKG,QAAL,KAAgB,CADjB,EACoC;AAC1C,YAAOH,KAAKI,OAAL,EAFD,EAEoC;AAC1C,YAAOJ,KAAKK,QAAL,EAHD,EAGoC;AAC1C,YAAOL,KAAKM,UAAL,EAJD,EAIoC;AAC1C,YAAON,KAAKO,UAAL,EALD,EAKoC;AAC1C,YAAOC,KAAKC,KAAL,CAAW,CAACT,KAAKG,QAAL,KAAgB,CAAjB,IAAoB,CAA/B,CAND,EAMoC;AAC1C,WAAOH,KAAKU,eAAL,EAPD,CAOoC;AAPpC,KAAR;AASA,QAAG,OAAOC,IAAP,CAAYZ,GAAZ,CAAH,EACEA,MAAIA,IAAIa,OAAJ,CAAYC,OAAOC,EAAnB,EAAuB,CAACd,KAAKe,WAAL,KAAmB,EAApB,EAAwBC,MAAxB,CAA+B,IAAIH,OAAOC,EAAP,CAAUG,MAA7C,CAAvB,CAAJ;AACF,SAAI,IAAIC,CAAR,IAAahB,CAAb,EACE,IAAG,IAAIW,MAAJ,CAAW,MAAKK,CAAL,GAAQ,GAAnB,EAAwBP,IAAxB,CAA6BZ,GAA7B,CAAH,EACFA,MAAMA,IAAIa,OAAJ,CAAYC,OAAOC,EAAnB,EAAwBD,OAAOC,EAAP,CAAUG,MAAV,IAAkB,CAAnB,GAAyBf,EAAEgB,CAAF,CAAzB,GAAkC,CAAC,OAAMhB,EAAEgB,CAAF,CAAP,EAAaF,MAAb,CAAoB,CAAC,KAAId,EAAEgB,CAAF,CAAL,EAAWD,MAA/B,CAAzD,CAAN;AACA,WAAOlB,GAAP;AACD;AAlCwC,CAA3C",
+    "mappings": "AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,KAApB,CAA0B;AACzC;;;;;AAKAC,iBAAeC,WAAS,EAAxB,EAA4BC,WAAS,EAArC,EAAyC;AACvC;AACA,WAAOJ,MAAMK,GAAN,CAAUL,MAAMK,GAAN,CAAUD,QAAV,IAAsBD,SAASG,OAAzC,MAAsDH,SAASC,QAAtE;AACD;AACD;;;;;AAKAG,eAAaJ,WAAS,EAAtB,EAA0BC,WAAS,EAAnC,EAAuC;AACrC,WAAOJ,MAAMK,GAAN,CAAUL,MAAMK,GAAN,CAAUD,QAAV,IAAsBD,SAASG,OAAzC,CAAP;AACD;AAjBwC,CAA3C",
     "file": "../../src/model/user.js",
     "sourcesContent": [
-        "module.exports = class extends think.Model {\n  /**\n   * 密码校验\n   * @param {*} userInfo 用户信息\n   * @param {*} password 明文密码\n   */\n  verifyPassword(userInfo={}, password='') {\n    // console.log(think.md5(think.md5(password) + userInfo.encrypt))\n    return think.md5(think.md5(password) + userInfo.encrypt) === userInfo.password\n  }\n  /**\n   * 生成密码\n   * @param {*} userInfo 用户信息\n   * @param {*} password 明文密码\n   */\n  signPassword(userInfo={}, password='') {\n    return think.md5(think.md5(password) + userInfo.encrypt)\n  }\n  formatDate(fmt='yyyy-MM-dd hh:mm:ss', date=new Date()) {\n    let o = {\n      \"M+\" : date.getMonth()+1,                 //月份   \n      \"d+\" : date.getDate(),                    //日   \n      \"h+\" : date.getHours(),                   //小时   \n      \"m+\" : date.getMinutes(),                 //分   \n      \"s+\" : date.getSeconds(),                 //秒   \n      \"q+\" : Math.floor((date.getMonth()+3)/3), //季度   \n      \"S\"  : date.getMilliseconds()             //毫秒   \n    };   \n    if(/(y+)/.test(fmt))   \n      fmt=fmt.replace(RegExp.$1, (date.getFullYear()+\"\").substr(4 - RegExp.$1.length));   \n    for(var k in o)   \n      if(new RegExp(\"(\"+ k +\")\").test(fmt))   \n    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : ((\"00\"+ o[k]).substr((\"\"+ o[k]).length)));   \n    return fmt; \n  }\n};\n"
+        "module.exports = class extends think.Model {\n  /**\n   * 密码校验\n   * @param {*} userInfo 用户信息\n   * @param {*} password 明文密码\n   */\n  verifyPassword(userInfo={}, password='') {\n    // console.log(think.md5(think.md5(password) + userInfo.encrypt))\n    return think.md5(think.md5(password) + userInfo.encrypt) === userInfo.password\n  }\n  /**\n   * 生成密码\n   * @param {*} userInfo 用户信息\n   * @param {*} password 明文密码\n   */\n  signPassword(userInfo={}, password='') {\n    return think.md5(think.md5(password) + userInfo.encrypt)\n  }\n};\n"
     ]
 }

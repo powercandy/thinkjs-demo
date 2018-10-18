@@ -29,7 +29,7 @@ module.exports = class extends Base {
     delete userInfo.password
     delete userInfo.encrypt
     // 更新登录时间
-    userInfo.last_login_time = user.formatDate()
+    userInfo.last_login_time = this.formatDate()
     user.where({ username: username }).update(userInfo)
     // 返回成功数据
     return this.success({
@@ -52,7 +52,7 @@ module.exports = class extends Base {
       return this.fail('当前密码输入错误')
     }
     userInfo.password = user.signPassword(userInfo, data.newPsd)
-    userInfo = Object.assign(userInfo, {update_time: user.formatDate()})
+    userInfo = Object.assign(userInfo, {update_time: this.formatDate()})
     const rows = await user.where({username: data.username}).update(userInfo)
     if (!rows) {
       return this.fail('更新失败')
@@ -70,7 +70,7 @@ module.exports = class extends Base {
     if (think.isEmpty(userInfo)) {
       return this.fail('请勿随便更改用户信息')
     }
-    data.update_time = user.formatDate()
+    data.update_time = this.formatDate()
     const rows = await user.where({username: data.username}).update(data)
     if (!rows) {
       return this.fail('更新失败')

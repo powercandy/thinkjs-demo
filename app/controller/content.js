@@ -6,6 +6,7 @@ module.exports = class extends Base {
   indexAction() {
     return _asyncToGenerator(function* () {})();
   }
+  // 获取文章列表
   listAction() {
     var _this = this;
 
@@ -19,6 +20,7 @@ module.exports = class extends Base {
       });
     })();
   }
+  // 获取列表对应的文章内容
   contentAction() {
     var _this2 = this;
 
@@ -39,6 +41,7 @@ module.exports = class extends Base {
       });
     })();
   }
+  // 新增文章
   addAction() {
     var _this3 = this;
 
@@ -48,6 +51,14 @@ module.exports = class extends Base {
       if (think.isEmpty(contentInfo) || !contentInfo) {
         return _this3.fail('请检查参数是否正确');
       }
+      // 添加创建时间和category_id参数
+      contentInfo = Object.assign(contentInfo, {
+        category_id: '1',
+        create_time: _this3.formatDate(),
+        modify_time: _this3.formatDate(),
+        user_id: '1',
+        type: 'post'
+      });
       const result = yield content.add(contentInfo);
       if (think.isEmpty(result)) {
         return _this3.fail('增加数据失败');
@@ -57,15 +68,19 @@ module.exports = class extends Base {
       });
     })();
   }
+  // 更新文章
   updateAction() {
     var _this4 = this;
 
     return _asyncToGenerator(function* () {
       const content = _this4.model('content');
-      const contentInfo = _this4.post();
+      let contentInfo = _this4.post();
       if (think.isEmpty(contentInfo) || !contentInfo) {
         return _this4.fail('请检查参数是否正确');
       }
+      contentInfo = Object.assign(contentInfo, {
+        modify_time: _this4.formatDate()
+      });
       const result = yield content.update(contentInfo);
       if (think.isEmpty(result)) {
         return _this4.fail('更新失败');
@@ -73,6 +88,7 @@ module.exports = class extends Base {
       return _this4.success({ msg: '更新成功' });
     })();
   }
+  // 删除文章
   deleteAction() {
     var _this5 = this;
 
@@ -91,6 +107,26 @@ module.exports = class extends Base {
         return _this5.fail('删除失败');
       }
       return _this5.success({ msg: '删除成功' });
+    })();
+  }
+  // 搜素文章
+  searchAction() {
+    var _this6 = this;
+
+    return _asyncToGenerator(function* () {
+      const content = _this6.model('content');
+      const keys = _this6.post('keys');
+      if (think.isEmpty(keys) || !keys) {
+        return _this6.listAction();
+      }
+      let contentInfo = yield content.where({ title: ['like', `%${keys}%`] }).select();
+      if (think.isEmpty(contentInfo)) {
+        return _this6.fail('未搜索到相应文章');
+      }
+      return _this6.success({
+        msg: '搜索成功',
+        contentInfo: contentInfo
+      });
     })();
   }
 };
