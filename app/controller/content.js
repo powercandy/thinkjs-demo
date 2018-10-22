@@ -129,5 +129,20 @@ module.exports = class extends Base {
       });
     })();
   }
+  countAction() {
+    var _this7 = this;
+
+    return _asyncToGenerator(function* () {
+      const content = _this7.model('content');
+      let contentInfo = yield content.group('classify').select('classify', 'count(*)');
+      if (think.isEmpty(contentInfo)) {
+        return _this7.fail('获取失败');
+      }
+      return _this7.success({
+        msg: '获取成功',
+        contentInfo: contentInfo
+      });
+    })();
+  }
 };
 //# sourceMappingURL=content.js.map

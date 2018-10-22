@@ -103,4 +103,15 @@ module.exports = class extends Base {
       contentInfo: contentInfo
     })
   }
+  async countAction() {
+    const content = this.model('content')
+    let contentInfo = await content.group('classify').select('classify', 'count(*)')
+    if (think.isEmpty(contentInfo)) {
+      return this.fail('获取失败')
+    }
+    return this.success({
+      msg: '获取成功',
+      contentInfo: contentInfo
+    })
+  }
 };

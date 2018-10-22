@@ -18,7 +18,7 @@ module.exports = class extends Base {
       // 获取meta表中所有的数据
       const metaInfo = yield meta.select();
       return _this.success({
-        msg: '获取标签列表成功',
+        msg: '获取分类列表成功',
         metaInfo: metaInfo
       });
     })();
